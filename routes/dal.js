@@ -1,9 +1,37 @@
-function readOne(id, callback) {
+const fs = require('fs');
 
+function readOne(id, callback) {
+    const fileName = './routes/runner.txt';
+    fs.readFile(fileName, (e, data) => {
+        if(e)
+            {throw e}
+        else{
+            let parsed = JSON.parse(data.toString());
+            if(parsed.length == 0){
+                parsed = [];
+            }else{
+                callback(null, parsed);
+            }
+        }
+    });
 }
 
 function readAll(callback) {
+    const fileName = './routes/runner.txt';
+    fs.readFile(fileName, (e, data) => {
+        if(e){throw e}
+        else{
+            let parsed = JSON.parse(data.toString());
+            if(parsed.length == 0){
+                parsed = [];
+            }else{
+                callback(null, parsed);
+            }
+        }
 
+        //const data = d && d.length > 0 ? JSON.parse(d.toString()) : [];
+        
+    });
 }
 
 function saveOne(m, callback) {
@@ -32,3 +60,4 @@ function updateOne(m, callback) {
 function deleteOne(m, callback) {
 
 }
+module.exports.readAll = readAll;

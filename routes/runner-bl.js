@@ -1,13 +1,23 @@
 const dal = require('./dal');
 
-function getRunner(id) {
+function getRunner(id, callback) {
     dal.getRunner(id, function (runnderData) {
-
+        if (err) {
+            callback(err);
+        } else {
+            callback(null, runnersData);
+        }
     })
 }
 
-function getRunners() {
-
+function getRunners(callback) {
+    dal.readAll(function (err, runnersData) {
+        if (err) {
+            callback(err);
+        } else {
+            callback(null, runnersData);
+        }
+    })
 }
 
 function createRunner(runner, callback) {
@@ -29,4 +39,4 @@ function deleteRunner(runner) {
 
 }
 
-
+module.exports.getRunners = getRunners;

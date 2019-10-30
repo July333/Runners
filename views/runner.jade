@@ -1,5 +1,17 @@
 extends layout
 
 block content
-  h1= id
   p Welcome to #{name} you run #{km} km
+  table
+    thead
+      tr
+        th ID
+        th Name
+        th Km
+    tbody
+      each runner in runners
+        tr
+          td #{runner.id}
+          td #{runner.name}
+          td #{runner.km}
+          td button(type='submit', onClick='edit("#{runner.km}")') Update
